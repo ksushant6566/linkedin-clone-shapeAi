@@ -67,15 +67,17 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
+        required: true
     },
     company: {
-        type: String
+        type: String,
     },
     website: {
         type: String
     },
     location: {
-        type: String
+        type: String,
+        required: true
     },
     status: {
         type: String,
@@ -84,7 +86,8 @@ const UserSchema = new Schema({
         type: [String],
     },
     bio: {
-        type: String
+        type: String,
+        required: true
     },
     experience: [ExperienceSchema],
     education: [EducationSchema],
