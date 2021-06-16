@@ -22,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
 app.use('/users', require('./routes/User.routes'));
+app.use('/posts', require('./routes/Post.routes'));
 
 // app.use(express.static(path.join(__dirname, 'public')));
 
