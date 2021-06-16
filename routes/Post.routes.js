@@ -6,7 +6,7 @@ const { validatePost, validateComment } = require('../validation/post.validator'
 
 const Post = require('../models/Post.model');
 
-// @route   GET /posts
+// @route   GET api/posts
 // @desc    Get Post
 // @access  Private
 router.get('/', verifyUser, async (req, res) => {
@@ -18,7 +18,7 @@ router.get('/', verifyUser, async (req, res) => {
     }
 });
 
-// @route   GET /posts/:postId
+// @route   GET api/posts/:postId
 // @desc    Get Post by Id
 // @access  Private
 router.get('/:postId', verifyUser, async (req, res) => {
@@ -31,7 +31,7 @@ router.get('/:postId', verifyUser, async (req, res) => {
     }
 })
 
-// @route   POST /posts
+// @route   POST api/posts
 // @desc    Create post
 // @access  Private
 router.post('/', verifyUser, validatePost, async (req, res) => {
