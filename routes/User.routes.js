@@ -61,7 +61,8 @@ userRouter.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(200).json({
         success: true,
         status: "login successfull!",
-        token: token
+        token: token,
+        ...req.user._doc,
     });
 })
 

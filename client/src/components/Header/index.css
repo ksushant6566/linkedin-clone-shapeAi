@@ -1,0 +1,24 @@
+.header-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.header {
+    width: 1128px;
+    border-bottom: none !important;
+}
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.nav-item p {
+    font-size: 12px;
+    font-weight: 300;
+}
+.ui.menu .item {
+    color: grey;
+}

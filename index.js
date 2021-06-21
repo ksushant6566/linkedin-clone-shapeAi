@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const cors = require('cors');
 
 require('dotenv').config()
 // const authenticate = require('./authenticate');
@@ -15,6 +16,7 @@ connect.then(() => {
 }, (err) => { console.log(err); });
 
 const app = express();
+app.use(cors())
 
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
