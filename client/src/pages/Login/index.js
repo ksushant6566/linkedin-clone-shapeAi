@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../../context/auth'
 
@@ -9,6 +9,7 @@ const baseUrl = 'http://localhost:8080/users'
 
 const Login = () => {
     const { login } = useContext(AuthContext)
+    const history = useHistory();
 
     const [resMsg, setResMsg] = useState([])
     const [info, setInfo] = useState({
@@ -28,6 +29,7 @@ const Login = () => {
         try {
             const res = await axios.post(`${baseUrl}/login`, info);
             login(res.data)
+            history.push('/feed')
         } catch (error) {
             setResMsg(error.response.data.err);
         }

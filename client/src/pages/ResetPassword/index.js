@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 import { Input } from 'semantic-ui-react'
@@ -8,6 +8,8 @@ const baseUrl = 'http://localhost:8080/users'
 
 const ResetPassword = () => {
     const { resetToken } = useParams()
+    const history = useHistory()
+
     const [info, setInfo] = useState({
         password: '',
     })
@@ -25,11 +27,12 @@ const ResetPassword = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const { data } = await axios.post(`${baseUrl}/reset/${resetToken}`, info);
-            
-            setResMsg( data.err ? data.err : data.msg );
+            await axios.post(`${baseUrl}/reset/${resetToken}`, info);
+            setResMsg("password changed successfully!");
+            history.push('/login')
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data.err)
+            setResMsg(error.response.data.err);
         }
     }
 

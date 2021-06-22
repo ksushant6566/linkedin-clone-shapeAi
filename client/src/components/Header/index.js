@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
 
 import { Link } from 'react-router-dom';
-import { Menu, Icon, Input } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 import './index.css'
 
@@ -111,7 +111,6 @@ const Header = () => {
                             name='logout'
                             active={activeItem === 'logout'}
                             onClick={() => logout()}
-                            as={Link}
                         />
                     </Menu.Menu>
                 )}
