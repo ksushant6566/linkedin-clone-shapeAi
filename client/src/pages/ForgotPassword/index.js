@@ -1,22 +1,21 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { AuthContext } from '../../context/auth'
 
 import { Input } from 'semantic-ui-react'
 
 const baseUrl = 'http://localhost:8080/users'
 
-const Login = () => {
-    const { login } = useContext(AuthContext)
-
-    const [resMsg, setResMsg] = useState([])
+const ForgotPassword = () => {
     const [info, setInfo] = useState({
         username: '',
-        password: '',
     })
+    const [resMsg, setResMsg] = useState('')
+    const [errMsg, setErrMsg] = useState([])
+
     const handleChange = e => {
         const { name, value } = e.target;
+        setResMsg("");
         setInfo({
             ...info,
             [name]: value
@@ -26,52 +25,44 @@ const Login = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${baseUrl}/login`, info);
-            login(res.data)
+            const { data } = await axios.post(`${baseUrl}/forgot-password`, info);
+            setResMsg(data.msg);
         } catch (error) {
-            setResMsg(error.response.data.err);
+            setErrMsg(error.response.data.err);
         }
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <label>
-                Username
+                username
             </label>
             <Input
                 fluid
                 name='username'
-                placeholder='Username'
+                placeholder='username'
                 value={info.username}
                 onChange={handleChange}
             />
             <br />
-            <label>
-                Password (6 or more characters)
-            </label>
-            <Input
-                fluid
-                name='password'
-                placeholder='Password'
-                value={info.password}
-                onChange={handleChange}
-            />
             <button className='auth-btn'>
-                Signin
+                Send reset password email
             </button>
-            <br/>
-            <br/>
             <div className="auth-link-container">
-                <Link to='/forgot-password' >
-                    forgot passport
+                <Link to='/login' >
+                    Login
                 </Link>
                 <Link to='signup' >
                     Join now
                 </Link>
             </div>
+
+            {resMsg === '' ? null : (
+                <h1 key={resMsg} className="auth-msg">{resMsg}</h1>
+            )}
             <div className="auth-msg-container">
-                {resMsg.length === 0 ? null : (
-                    resMsg.map(err => (
+                {errMsg.length === 0 ? null : (
+                    errMsg.map(err => (
                         <h1 key={err.msg} className="auth-msg">{err.msg}</h1>
                     ))
                 )}
@@ -80,4 +71,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default ForgotPassword;

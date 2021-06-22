@@ -1,22 +1,24 @@
-import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
+
 import axios from 'axios'
-import { AuthContext } from '../../context/auth'
 
 import { Input } from 'semantic-ui-react'
 
 const baseUrl = 'http://localhost:8080/users'
 
-const Login = () => {
-    const { login } = useContext(AuthContext)
+const Signup = () => {
+    const history = useHistory();
 
     const [resMsg, setResMsg] = useState([])
     const [info, setInfo] = useState({
         username: '',
+        email: '',
         password: '',
     })
     const handleChange = e => {
         const { name, value } = e.target;
+        setResMsg("");
         setInfo({
             ...info,
             [name]: value
@@ -26,8 +28,8 @@ const Login = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${baseUrl}/login`, info);
-            login(res.data)
+            await axios.post(`${baseUrl}/signup`, info);
+            history.push('/login')
         } catch (error) {
             setResMsg(error.response.data.err);
         }
@@ -47,6 +49,17 @@ const Login = () => {
             />
             <br />
             <label>
+                Email
+            </label>
+            <Input
+                fluid
+                name='email'
+                placeholder='Email'
+                value={info.email}
+                onChange={handleChange}
+            />
+            <br />
+            <label>
                 Password (6 or more characters)
             </label>
             <Input
@@ -56,19 +69,16 @@ const Login = () => {
                 value={info.password}
                 onChange={handleChange}
             />
+
             <button className='auth-btn'>
-                Signin
+                Join Now
             </button>
-            <br/>
-            <br/>
             <div className="auth-link-container">
-                <Link to='/forgot-password' >
-                    forgot passport
-                </Link>
-                <Link to='signup' >
-                    Join now
+                <Link to='/Login' >
+                    Login
                 </Link>
             </div>
+
             <div className="auth-msg-container">
                 {resMsg.length === 0 ? null : (
                     resMsg.map(err => (
@@ -80,4 +90,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Signup;

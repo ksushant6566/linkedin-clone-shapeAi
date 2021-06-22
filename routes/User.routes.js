@@ -32,7 +32,7 @@ userRouter.get('/:userId', authenticate.verifyUser, async (req, res) => {
 
 userRouter.post('/signup', validateUserSignup, async (req, res) => {
     try {
-        const user = await User.register(new User(req), req.body.password);
+        const user = await User.register(new User(req.body), req.body.password);
         await user.save();
 
         const mailOptions = {
@@ -67,7 +67,7 @@ userRouter.post('/login', passport.authenticate('local'), (req, res) => {
 })
 
 // emails reset link
-userRouter.post('/reset-password', async (req, res) => {
+userRouter.post('/forgot-password', async (req, res) => {
 
     try {
         const user = await User.findOne({ username: req.body.username });
@@ -87,7 +87,7 @@ userRouter.post('/reset-password', async (req, res) => {
             subject: "reset password",
             html: `
                 <p>A request to change your password was made,</p>
-                <h5>click the link <a href="http://localhost:8080/reset/${token}></a> to change your password within one hour</h5>
+                <h5>click the link <a href="http://localhost:3000/reset/${token}>here</a> to change your password within one hour</h5>
             `
         };
         transporter.sendMail(mailOptions, (error, info) => {
@@ -96,7 +96,7 @@ userRouter.post('/reset-password', async (req, res) => {
                 res.json("unsuccessfull");
             } else {
                 console.log("Email sent: " + info.response);
-                res.json("email sent successfully");
+                res.json({msg: "email sent successfully"});
             }
         });
 

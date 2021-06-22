@@ -77,7 +77,6 @@ const UserSchema = new Schema({
     },
     location: {
         type: String,
-        required: true
     },
     status: {
         type: String,
@@ -87,7 +86,6 @@ const UserSchema = new Schema({
     },
     bio: {
         type: String,
-        required: true
     },
     experience: [ExperienceSchema],
     education: [EducationSchema],

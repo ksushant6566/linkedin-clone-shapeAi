@@ -46,12 +46,12 @@ const Header = () => {
                     </Menu.Menu>
                 ) : (
                     <Menu.Menu position='right'>
-                        <div>
+                        {/* <div>
                             <Input icon placeholder='Search...'>
                                 <input />
                                 <Icon name='search' />
                             </Input>
-                        </div>
+                        </div> */}
                         <Menu.Item
                             name='home'
                             active={activeItem === 'home'}
