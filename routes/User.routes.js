@@ -87,7 +87,7 @@ userRouter.post('/forgot-password', async (req, res) => {
             subject: "reset password",
             html: `
                 <p>A request to change your password was made,</p>
-                <h5>click the link <a href="http://localhost:3000/reset/${token}>here</a> to change your password within one hour</h5>
+                <h5>click the link http://localhost:3000/reset/${token} to change your password within one hour</h5>
             `
         };
         transporter.sendMail(mailOptions, (error, info) => {

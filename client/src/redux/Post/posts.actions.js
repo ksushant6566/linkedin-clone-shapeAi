@@ -20,12 +20,12 @@ export const deletePostStart = postID => ({
     payload: postID
 })
 
-export const fetchPostTStart = postID => ({
+export const fetchPostStart = postID => ({
     type: postTypes.FETCH_POST_START,
     payload: postID,
 })
 
-export const setPOST = post => ({
+export const setPost = post => ({
     type: postTypes.SET_POST,
     payload: post
 })

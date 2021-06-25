@@ -31,7 +31,8 @@ const Login = () => {
             login(res.data)
             history.push('/feed')
         } catch (error) {
-            setResMsg(error.response.data.err);
+            console.log(error)
+            // setResMsg(error.response.data.err);
         }
     }
 

@@ -1,14 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../context/auth';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react'
 
 import './index.css'
 
 const Header = () => {
-    const { user, logout } = useContext(AuthContext);
 
+    const { user, logout } = useContext(AuthContext);
+    const history = useHistory();
     const [activeItem, setActiveItem] = useState('');
 
     useEffect(() => {
@@ -18,6 +19,11 @@ const Header = () => {
     }, [user])
 
     const handleItemClick = (e, { name }) => setActiveItem(name)
+
+    const handleLogout = () =>{
+        logout();
+        history.push('/login')
+    }
 
     return (
         <div className='header-wrap'>
@@ -35,6 +41,7 @@ const Header = () => {
                             onClick={handleItemClick}
                             as={Link}
                             to='/signup'
+                            className='header-joinNow'
                         />
                         <Menu.Item
                             name='sign in'
@@ -42,6 +49,7 @@ const Header = () => {
                             onClick={handleItemClick}
                             as={Link}
                             to='/login'
+                            className='header-signIn'
                         />
                     </Menu.Menu>
                 ) : (

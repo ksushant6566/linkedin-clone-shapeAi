@@ -7,13 +7,13 @@ const INITIAL_STATE = {
 
 const postReducer = (state=INITIAL_STATE, action) => {
     switch (action.type) {
-        case postTypes.SET_PRODUCTS:
+        case postTypes.SET_POSTS:
             return {
                 ...state,
                 posts: action.payload
             }
         
-        case postTypes.SET_PRODUCT: 
+        case postTypes.SET_POST: 
         return {
             ...state,
             post: action.payload

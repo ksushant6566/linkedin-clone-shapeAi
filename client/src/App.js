@@ -6,6 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 // layouts
 import AuthLayout from './layouts/AuthLayout';
+import MainLayout from './layouts/MainLayout';
 
 // pages
 import Signup from './pages/Signup';
@@ -15,6 +16,7 @@ import ResetPassword from './pages/ResetPassword';
 
 // components
 import Header from './components/Header';
+import Feed from './pages/Feed';
 
 function App() {
   return (
@@ -32,6 +34,9 @@ function App() {
         )} />
         <Route exact path='/reset/:resetToken' render={() => (
           <AuthLayout Component={ResetPassword} />
+        )} />
+        <Route exact path='/feed' render={() => (
+          <MainLayout Component={Feed} />
         )} />
       </Router>
     </AuthProvider>
