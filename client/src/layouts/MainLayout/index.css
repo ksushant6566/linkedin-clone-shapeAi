@@ -6,12 +6,10 @@
     justify-content: space-around;
 }
 .mainLayout-item-wrap {
-    padding: 10px;
     border-radius: 5px;
     background-color: white;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     border: 1px solid rgba(0, 0, 0, 0.1);
 
     /* to be removed */
@@ -23,4 +21,11 @@
     height: 400px;
     border-radius: 18px;
     padding: 0px 12px;
+}
+
+.mainLayout-component {
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;    */
 }

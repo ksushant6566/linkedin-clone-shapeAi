@@ -1,0 +1,123 @@
+.createPost {
+    margin-bottom: 24px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.createPost .profile-img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: unset;
+    transform: translate(0%);
+    object-fit: cover;
+    object-position: center;
+}
+.createPost .profile-img img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.createPost-btn {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin: 4px 0px;
+    padding: 10px 8px 10px 16px;
+    width: 426px;
+    height: 48px;
+    border-radius: 35px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    text-align: start;
+}
+
+.createPost-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.createPost-head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+/* .createPost-head:is(h1, button) {
+    display: inline;
+} */
+
+.createPost-btn-close {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+.createPost-heading {
+    font-size: 20px;
+    font-weight: 400;
+    padding: 16px 24px;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 0px;
+    padding: 0px;
+}
+.createPost-userProfile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.createPost-userProfile h3{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0px;
+    padding: 18px;
+}
+.createPost-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.createPost-form .post-text {
+    border: none;
+    width: 100%;
+    padding: 6px;
+    min-height: 100px;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+.post-text:active {
+    border: none;
+}
+.createPost-form .post-image {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    width: 100%;
+    padding: 6px;
+    height: 48px;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+.createPost-form .submit-button {
+    border: none;
+    border-radius: 18px;
+    background-color: #0a66c2;
+    text-align: center;
+    color: white;
+    padding: 6px;
+    width: 66px;
+    height: 36px;
+}
+.createPost-form .submit-button:active,  .submit-button:hover{
+    background-color: #004285;
+    transform: translateY(1px);
+}

@@ -2,7 +2,7 @@ import { AxiosInstance } from "../../utils/axios";
 
 export const handleAddPost = async post => {
     try {
-        return await AxiosInstance.post('post', post);
+        return await AxiosInstance.post('posts', post);
     } catch (error) {
         console.log(error.response.data.err)
     }

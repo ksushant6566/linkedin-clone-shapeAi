@@ -69,6 +69,9 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String
+    },
     company: {
         type: String,
     },

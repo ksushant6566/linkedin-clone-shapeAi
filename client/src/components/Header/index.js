@@ -14,7 +14,7 @@ const Header = () => {
 
     useEffect(() => {
         const pathname = window.location.pathname;
-        const path = pathname === '/' ? 'home' : pathname.substring(1);
+        const path = pathname === '/feed' ? 'home' : pathname.substring(1);
         setActiveItem(path)
     }, [user])
 
@@ -65,7 +65,7 @@ const Header = () => {
                             active={activeItem === 'home'}
                             onClick={handleItemClick}
                             as={Link}
-                            to='/'
+                            to='/feed'
                             className='nav-item'
                         >
                             <Icon name='home' />
@@ -118,7 +118,7 @@ const Header = () => {
                         <Menu.Item
                             name='logout'
                             active={activeItem === 'logout'}
-                            onClick={() => logout()}
+                            onClick={() => handleLogout()}
                         />
                     </Menu.Menu>
                 )}
