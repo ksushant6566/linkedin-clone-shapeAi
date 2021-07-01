@@ -3,14 +3,11 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-const { verifyUser } = require('../authenticate');
-
 const jwtSecret = process.env.JWT_SECRET;
 const verify = require('../utilities/verify-token');
 
 const Message = require('../models/Message.model');
 const Conversation = require('../models/Conversation.model');
-const GlobalMessage = require('../models/GlobalMessage.model');
 
 let jwtUser = null;
 
@@ -25,60 +22,6 @@ router.use(function(req, res, next) {
         res.end(JSON.stringify({ message: 'Unauthorized' }));
         res.sendStatus(401);
     }
-});
-
-// router.use(verifyUser)
-
-// Get global messages
-router.get('/global', (req, res) => {
-    GlobalMessage.aggregate([
-        {
-            $lookup: {
-                from: 'users',
-                localField: 'from',
-                foreignField: '_id',
-                as: 'fromObj',
-            },
-        },
-    ])
-        .project({
-            'fromObj.password': 0,
-            'fromObj.__v': 0,
-            'fromObj.date': 0,
-        })
-        .exec((err, messages) => {
-            if (err) {
-                console.log(err);
-                res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ message: 'Failure' }));
-                res.sendStatus(500);
-            } else {
-                res.send(messages);
-            }
-        });
-});
-
-// Post global message
-router.post('/global', (req, res) => {
-    console.log(req.body)
-    let message = new GlobalMessage({
-        from: jwtUser._id,
-        body: req.body.body,
-    });
-
-    req.io.sockets.emit('messages', req.body.body);
-
-    message.save(err => {
-        if (err) {
-            console.log(err);
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ message: 'Failure' }));
-            res.sendStatus(500);
-        } else {
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ message: 'Success' }));
-        }
-    });
 });
 
 // Get conversations list
@@ -107,7 +50,6 @@ router.get('/conversations', (req, res) => {
                 res.end(JSON.stringify({ message: 'Failure' }));
                 res.sendStatus(500);
             } else {
-                console.log(conversations)
                 res.send(conversations);
             }
         });
@@ -157,7 +99,6 @@ router.get('/conversations/query', (req, res) => {
                 res.end(JSON.stringify({ message: 'Failure' }));
                 res.sendStatus(500);
             } else {
-                console.log(messages)
                 res.send(messages);
             }
         });

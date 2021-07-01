@@ -46,7 +46,7 @@ function App() {
         <Route exact path='/post/:postId' render={() => (
           <MainLayout Component={Post} />
         )} />
-        <Route exact path='/chat' component={Chat} />
+        <Route exact path='/messaging' component={Chat} />
       </Router>
       </SnackbarProvider>
     </AuthProvider>

@@ -17,10 +17,15 @@ connect.then(() => {
 
 const app = express();
 
-const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-const io = require("socket.io")(server);
-
 app.use(cors())
+
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const io = require("socket.io")(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+  }});
+
 
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
@@ -38,14 +43,3 @@ app.use('/messages', require('./routes/Message.routes'));
 app.use('/company', require('./routes/Company.routes'));
 
 // app.use(express.static(path.join(__dirname, 'public')));
-
-
-
-
-
-
-
-
-
-
-

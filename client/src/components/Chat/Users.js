@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import socketIOClient from "socket.io-client";
 
 import { useGetUsers } from "../../Services/userService";
-// import commonUtilites from "../Utilities/common";
 
 const useStyles = makeStyles((theme) => ({
   subheader: {
@@ -42,7 +41,7 @@ const Users = (props) => {
   }, [newUser]);
 
   useEffect(() => {
-    const socket = socketIOClient(process.env.REACT_APP_API_URL);
+    const socket = socketIOClient(process.env.REACT_APP_BASE_URL);
     socket.on("users", (data) => {
       setNewUser(data);
     });
@@ -63,7 +62,7 @@ const Users = (props) => {
               button
             >
               <ListItemAvatar className={classes.avatar}>
-                <Avatar>{u.name}</Avatar>
+                <Avatar>{u.username}</Avatar>
               </ListItemAvatar>
               <ListItemText primary={u.username} />
             </ListItem>

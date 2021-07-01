@@ -5,15 +5,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import LanguageIcon from "@material-ui/icons/Language";
-import Divider from "@material-ui/core/Divider";
 import { makeStyles } from "@material-ui/core/styles";
 
 import socketIOClient from "socket.io-client";
 import { AuthContext } from "../../context/auth";
 
 import { useGetConversations } from "../../Services/chatService";
-// import commonUtilites from "../Utilities/common";
 
 const useStyles = makeStyles((theme) => ({
   subheader: {
@@ -61,7 +58,7 @@ const Conversations = (props) => {
   }, [newConversation]);
 
   useEffect(() => {
-    let socket = socketIOClient(process.env.REACT_APP_API_URL);
+    let socket = socketIOClient(process.env.REACT_APP_BASE_URL);
     socket.on("messages", (data) => setNewConversation(data));
 
     return () => {
@@ -71,21 +68,6 @@ const Conversations = (props) => {
 
   return (
     <List className={classes.list}>
-      <ListItem
-        classes={{ root: classes.subheader }}
-        onClick={() => {
-          props.setScope("Global Chat");
-        }}
-      >
-        <ListItemAvatar>
-          <Avatar className={classes.globe}>
-            <LanguageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText className={classes.subheaderText} primary="Global Chat" />
-      </ListItem>
-      <Divider />
-
       {conversations && (
         <React.Fragment>
           {conversations.map((c) => (
@@ -95,16 +77,16 @@ const Conversations = (props) => {
               button
               onClick={() => {
                 props.setUser(handleRecipient(c.recipientObj));
-                props.setScope(handleRecipient(c.recipientObj).name);
+                props.setScope(handleRecipient(c.recipientObj).username);
               }}
             >
               <ListItemAvatar>
                 <Avatar>
-                  {(c.recipientObj).name}
+                  {(c.recipientObj).username}
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={handleRecipient(c.recipientObj).name}
+                primary={handleRecipient(c.recipientObj).username}
                 secondary={<React.Fragment>{c.lastMessage}</React.Fragment>}
               />
             </ListItem>
