@@ -22,13 +22,14 @@ const Post = () => {
         dispatch(fetchPostStart(postId))
     }, [])
 
+    if(Object.keys(post).length === 0) return null
     return (
         <>
             <PostCard post={post} />
             <CreateComment postId={post && post._id} />
             {post && post.comments && post.comments.length > 0 && (
                 post.comments.map(comment => (
-                    <Comment comment={comment} />
+                    <Comment key={comment._id} postId={post._id} comment={comment} />
                 ))
             )}
         </>

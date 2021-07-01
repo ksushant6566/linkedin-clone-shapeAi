@@ -22,7 +22,7 @@ exports.validateComment = [
         if(!errors.isEmpty()) {
             return res.status(400).json({errors: errors.array() });
         }
-        req.body.user = req.user._id;
+        req.body.user = req.user;
         req.body.name = req.user.username;
         next();
     }

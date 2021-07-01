@@ -91,7 +91,7 @@ router.post('/like/:postId', verifyUser, async(req, res) => {
     try {
         const postId = req.params.postId;
         const user = req.user;
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId).populate('user');
 
         const likeIndex = post.likes.findIndex(like => like.user.toString() === user._id.toString());
         if (likeIndex === -1) {
@@ -100,7 +100,7 @@ router.post('/like/:postId', verifyUser, async(req, res) => {
             post.likes.splice(likeIndex, 1);
         }
 
-        await (await post.save()).populate('user');
+        await post.save();
         res.status(200).json(post);
     } catch (error) {
         console.log(error)
@@ -131,7 +131,7 @@ router.post('/comment/:postId', verifyUser, validateComment, async(req, res) => 
 router.delete('/comment/:postId/:commentId', verifyUser, async(req, res) => {
     try {
         const user = req.user;
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.findById(req.params.postId).populate('user');
         const commentIndex = post.comments.findIndex(comment => comment._id.toString() === req.params.commentId);
         if (commentIndex === -1) 
             return res.status(400).json({err: "comment not found"})

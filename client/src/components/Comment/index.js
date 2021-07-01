@@ -1,15 +1,26 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
+import { useDispatch } from 'react-redux';
+import { AuthContext } from '../../context/auth';
 
+// actions
+import { deleteCommentStart } from '../../redux/Post/posts.actions';
+
+// components
+import InputOption from '../InputOption';
 import { Avatar } from '@material-ui/core';
-// import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
-// import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
-// import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-// import SendOutlinedIcon from '@material-ui/icons/SendOutlined';
+import { DeleteForever } from '@material-ui/icons';
 
 // styles
 import './index.css';
 
-const Comment = forwardRef(({comment: { user: author, comment }}, ref) => {
+const Comment = forwardRef(({comment: { user: author, comment, _id }, postId}, ref) => {
+  
+  const dispatch = useDispatch()
+  const { user } = useContext(AuthContext)
+
+  const handleDeleteComment = () => {
+    dispatch(deleteCommentStart({postId, commentId: _id }))
+  }
 
   return (
     <div ref={ref} className="comment">
@@ -22,6 +33,11 @@ const Comment = forwardRef(({comment: { user: author, comment }}, ref) => {
         </div>
         <div className="comment_body">
           <p>{comment}</p>
+          {user._id == author._id &&
+            <InputOption handleclick={handleDeleteComment} Icon={DeleteForever} title="Delete" color="gray" />
+          }
+        </div>
+        <div className="post_buttons">
         </div>
     </div>
   );

@@ -62,7 +62,7 @@ const Users = (props) => {
               button
             >
               <ListItemAvatar className={classes.avatar}>
-                <Avatar>{u.username}</Avatar>
+                <Avatar>{u.image || u.username}</Avatar>
               </ListItemAvatar>
               <ListItemText primary={u.username} />
             </ListItem>

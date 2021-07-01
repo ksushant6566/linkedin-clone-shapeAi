@@ -40,6 +40,11 @@ export const addCommentStart = data => ({
     payload: data
 })
 
+export const deleteCommentStart = data => ({
+    type: postTypes.DELETE_COMMENT_START,
+    payload: data
+})
+
 export const updateOnePost = post => ({
     type: postTypes.UPDATE_ONE_POST,
     payload: post

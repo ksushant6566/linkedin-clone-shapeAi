@@ -46,8 +46,18 @@ export const handleAddComment = async ({ postId, comment }) => {
 
 export const handleDeletePost = async postId => {
     try {
+        console.log("delete comment")
         await AxiosInstance.delete(`posts/${postId}`); 
     } catch (error) {
         console.log(error.response.data.err)   
+    }
+}
+
+export const handleDeleteComment = async ({postId, commentId}) => {
+    try {
+        const { data } = await AxiosInstance.delete(`posts/comment/${postId}/${commentId}`)
+        return data;
+    } catch (error) {
+        console.log(error.response.data.err)  
     }
 }

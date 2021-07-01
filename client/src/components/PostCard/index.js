@@ -11,7 +11,6 @@ import { deletePostStart, likePostStart } from '../../redux/Post/posts.actions';
 import InputOption from '../InputOption';
 
 import { Avatar } from '@material-ui/core';
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import { DeleteForever, ThumbUpAlt } from '@material-ui/icons';
 
@@ -38,6 +37,7 @@ const PostCard = forwardRef(({post: { user: author, text, image, likes, comments
 
   const handleDeletePost = () => {
     dispatch(deletePostStart(_id))
+    history.push(`/feed`)
   }
 
   return (

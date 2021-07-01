@@ -16,7 +16,8 @@ import {
     handleLikePost, 
     handleFetchPost, 
     handleAddComment, 
-    handleDeletePost 
+    handleDeletePost,
+    handleDeleteComment
 } from './posts.helper';
 
 
@@ -43,9 +44,11 @@ export function* onAddPostStart() {
 export function* fetchPosts({ payload }) {
     try {
         const posts = yield handleFetchPosts( payload );
-        console.log(posts);
         yield put(
-            setPosts(posts)
+            setPosts(posts.reverse())
+        );
+        yield put(
+            setPost({})
         );
     } catch (error) {
         console.log(error)
@@ -110,6 +113,24 @@ export function* onDeletePostStart() {
     yield takeLatest(postTypes.DELETE_POST_START, deletePost)
 }
 
+export function* deleteComment({ payload }) {
+    try {
+        const post = yield handleDeleteComment(payload);
+        yield put(
+            setPost(post)
+        );
+        yield put(
+            updateOnePost(post)
+        );
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* onDeleteCommentStart() {
+    yield takeLatest(postTypes.DELETE_COMMENT_START, deleteComment)
+}
+
 export function* fetchPost({ payload }) {
     try {
         const post = yield handleFetchPost(payload);
@@ -134,5 +155,6 @@ export default function* postSagas() {
         call(onDeletePostStart),
         call(onFetchPostStart),
         call(onAddCommentStart),
+        call(onDeleteCommentStart)
     ])
 }
