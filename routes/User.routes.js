@@ -19,6 +19,15 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
 const userRouter = express.Router();
 
+userRouter.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({err: error});
+    }
+})
+
 userRouter.get('/:userId', authenticate.verifyUser, async (req, res) => {
     try {
         const userId = req.params.userId;

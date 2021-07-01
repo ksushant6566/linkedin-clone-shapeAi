@@ -1,4 +1,4 @@
-.post {
+.comment {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 15px;
@@ -6,45 +6,45 @@
     border-radius: 10px;
   }
   
-  .post_header {
+  .comment_header {
     display: flex;
     margin-bottom: 10px;
   }
   
-  .postInfo {
+  .commentInfo {
     margin-left: 10px;
   }
   
-  .postInfo > p {
+  .commentInfo > p {
     font-size: 12px;
     color: gray;
   }
   
-  .postInfo > h2 {
+  .commentInfo > h2 {
     font-size: 15px;
     margin-bottom: 3px;
   }
   
-  .post_buttons {
+  .comment_buttons {
     display: flex;
     /* justify-content: space-evenly; */
   }
   
-  .post_body {
+  .comment_body {
     overflow-wrap: anywhere;
   }
 
 
-  .post_body >img{
+  .comment_body >img{
     width: 100%;
   }
 
-  .post_analytics {
+  .comment_analytics {
     font-size: 12px;
     color: gray;
     margin-top: 6px;
     display: flex;
   }
-  .post_analytics >p {
+  .comment_analytics >p {
     padding: 3px;
   }

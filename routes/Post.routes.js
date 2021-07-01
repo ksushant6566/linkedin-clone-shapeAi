@@ -11,9 +11,10 @@ const Post = require('../models/Post.model');
 // @access  Private
 router.get('/', verifyUser, async (req, res) => {
     try {
-        const posts = await Post.find().sort({ date: -1 });
+        const posts = await Post.find().populate('user').sort({ date: -1 }).exec();
         res.status(200).json(posts)
     } catch (error) {
+        console.log(error)
         res.status(404).json({ err: error });
     }
 });
@@ -24,7 +25,7 @@ router.get('/', verifyUser, async (req, res) => {
 router.get('/:postId', verifyUser, async (req, res) => {
     try {
         const postId = req.params.postId;
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId).populate('user').populate('comments.user');
         res.status(200).json(post);
     } catch (error) {
         res.status(500).json({err: error})
@@ -99,9 +100,10 @@ router.post('/like/:postId', verifyUser, async(req, res) => {
             post.likes.splice(likeIndex, 1);
         }
 
-        await post.save();
+        await (await post.save()).populate('user');
         res.status(200).json(post);
     } catch (error) {
+        console.log(error)
         res.status(500).json({err: error});
     }
 })
@@ -114,7 +116,7 @@ router.post('/comment/:postId', verifyUser, validateComment, async(req, res) => 
     try {
         const post = await Post.findById(req.params.postId);
         post.comments.unshift(req.body);
-        await post.save();
+        await (await post.save()).populate('user').populate('comments.user')
         res.status(200).json(post);
 
     } catch (error) {

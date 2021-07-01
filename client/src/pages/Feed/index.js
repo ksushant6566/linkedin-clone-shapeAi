@@ -23,8 +23,8 @@ const Feed = () => {
     return (
         <div>
             {
-                posts && posts.map(post => (
-                    <PostCard post={post} />
+                posts && Array.isArray(posts) && posts.map(post => (
+                    <PostCard key={post._id} post={post} />
                 ))
             }
         </div>

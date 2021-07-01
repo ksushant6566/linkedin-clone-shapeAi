@@ -1,7 +1,23 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import postTypes from './posts.types';
-import { setPost, setPosts, fetchPostStart, fetchPostsStart, deletePostStart, addPostStart } from './posts.actions'
-import { handleAddPost, handleFetchPosts } from './posts.helper';
+import { 
+    setPost, 
+    setPosts, 
+    updateOnePost, 
+    fetchPostStart, 
+    fetchPostsStart, 
+    deletePostStart, 
+    addPostStart 
+} from './posts.actions'
+
+import { 
+    handleAddPost, 
+    handleFetchPosts, 
+    handleLikePost, 
+    handleFetchPost, 
+    handleAddComment, 
+    handleDeletePost 
+} from './posts.helper';
 
 
 
@@ -40,42 +56,83 @@ export function* onFetchPostsStart() {
     yield takeLatest(postTypes.FETCH_POSTS_START, fetchPosts)
 }
 
-// export function* deletePost({ payload }) {
-//     try {
-//         yield handleDeletePost(payload);
-//         yield put(
-//             fetchPostsStart()
-//         );
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+export function* likePost({ payload }) {
+    try {
+        const post = yield handleLikePost( payload );
 
-// export function* onDeletePostStart() {
-//     yield takeLatest(postTypes.DELETE_POST_START, deletePost)
-// }
+        yield put(
+            updateOnePost(post)
+            // fetchPostStart()
+        );
+        yield put(
+            fetchPostStart(payload)
+        );
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-// export function* fetchPost({ payload }) {
-//     try {
-//         const post = yield handleFetchPost(payload);
-//         yield put(
-//             setPost(post)
-//         )
+export function* onLikePostStart() {
+    yield takeLatest(postTypes.LIKE_POST_START, likePost)
+}
 
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+export function* addComment({ payload }) {
+    try {
+        const post = yield handleAddComment( payload );
 
-// export function* onFetchPostStart() {
-//     yield takeLatest(postTypes.FETCH_POST_START, fetchPost)
-// }
+        yield put(
+            updateOnePost(post)
+        );
+        yield put(
+            fetchPostStart(payload.postId)
+        );
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export function* onAddCommentStart() {
+    yield takeLatest(postTypes.ADD_COMMENT_START, addComment)
+}
+
+export function* deletePost({ payload }) {
+    try {
+        yield handleDeletePost(payload);
+        yield put(
+            fetchPostsStart()
+        );
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* onDeletePostStart() {
+    yield takeLatest(postTypes.DELETE_POST_START, deletePost)
+}
+
+export function* fetchPost({ payload }) {
+    try {
+        const post = yield handleFetchPost(payload);
+        yield put(
+            setPost(post)
+        )
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export function* onFetchPostStart() {
+    yield takeLatest(postTypes.FETCH_POST_START, fetchPost)
+}
 
 export default function* postSagas() {
     yield all([
         call(onAddPostStart),
         call(onFetchPostsStart),
-        // call(onDeletePostStart),
-        // call(onFetchPostStart),
+        call(onLikePostStart),
+        call(onDeletePostStart),
+        call(onFetchPostStart),
+        call(onAddCommentStart),
     ])
 }

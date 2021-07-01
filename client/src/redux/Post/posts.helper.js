@@ -16,3 +16,38 @@ export const handleFetchPosts = async () => {
         console.log(error.response.data.err)
     }
 }
+
+export const handleLikePost = async postId => {
+    try {
+        const { data } = await AxiosInstance.post(`posts/like/${postId}`);
+        return data;
+    } catch (error) {
+        console.log(error.response.data.err)
+    }
+}
+
+export const handleFetchPost = async postId => {
+    try {
+        const { data } = await AxiosInstance.get(`posts/${postId}`);
+        return data;
+    } catch (error) {
+        console.log(error.response.data.err)
+    }
+}
+
+export const handleAddComment = async ({ postId, comment }) => {
+    try {
+        const { data } = await AxiosInstance.post(`posts/comment/${postId}`, { comment: comment });
+        return data;
+    } catch (error) {
+        console.log(error.response.data.err)   
+    }
+}
+
+export const handleDeletePost = async postId => {
+    try {
+        await AxiosInstance.delete(`posts/${postId}`); 
+    } catch (error) {
+        console.log(error.response.data.err)   
+    }
+}

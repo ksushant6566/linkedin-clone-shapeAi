@@ -1,4 +1,4 @@
-.createPost {
+.createComment {
     margin-bottom: 24px;
     padding: 12px 24px;
     border-radius: 12px;
@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.createPost .profile-img {
+.createComment .profile-img {
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -18,7 +18,7 @@
     object-fit: cover;
     object-position: center;
 }
-.createPost .profile-img img {
+.createComment .profile-img img {
     width: 50px;
     height: 50px;
     object-fit: cover;
@@ -26,7 +26,7 @@
     border-radius: 50%;
 }
 
-.createPost-btn {
+.createComment-btn {
     border: 1px solid rgba(0, 0, 0, 0.1);
     background-color: white;
     margin: 4px 0px;
@@ -41,29 +41,24 @@
     text-align: start;
 }
 
-.createPost-btn:hover {
+.createComment-btn:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.createPost-head {
+.createComment-head {
     display: flex;
     justify-content: space-between;
     padding-bottom: 18px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 24px;
 }
 
-/* .createPost-head:is(h1, button) {
-    display: inline;
-} */
-
-.createPost-btn-close {
+.createComment-btn-close {
     border: none;
     background-color: white;
     cursor: pointer;
     font-size: 20px;
 }
-.createPost-heading {
+.createComment-heading {
     font-size: 20px;
     font-weight: 400;
     padding: 16px 24px;
@@ -71,24 +66,24 @@
     margin: 0px;
     padding: 0px;
 }
-.createPost-userProfile {
+.createComment-userProfile {
     display: flex;
     align-items: center;
     margin-bottom: 18px;
 }
-.createPost-userProfile h3{
+.createComment-userProfile h3{
     font-size: 16px;
     font-weight: 600;
     margin: 0px;
     padding: 18px;
 }
-.createPost-form {
+.createComment-form {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-.createPost-form .post-text {
+.createComment-form .post-text {
     border: none;
     width: 100%;
     padding: 6px;
@@ -99,7 +94,7 @@
 .post-text:active {
     border: none;
 }
-.createPost-form .post-image {
+.createComment-form .post-image {
     border: 1px solid rgba(0, 0, 0, 0.5);
     border-radius: 6px;
     width: 100%;
@@ -108,7 +103,7 @@
     font-size: 14px;
     margin-bottom: 12px;
 }
-.createPost-form .submit-button {
+.createComment-form .submit-button {
     border: none;
     border-radius: 18px;
     background-color: #0a66c2;
@@ -118,7 +113,7 @@
     width: 66px;
     height: 36px;
 }
-.createPost-form .submit-button:active,  .submit-button:hover{
+.createComment-form .submit-button:active,  .submit-button:hover{
     background-color: #004285;
     transform: translateY(1px);
 }

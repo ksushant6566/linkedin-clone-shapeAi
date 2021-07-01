@@ -114,6 +114,10 @@ const UserSchema = new Schema({
     },
     expireToken: { 
         type: String 
+    },
+    date: {
+        type: String,
+        default: Date.now,
     }
 }, {
     timestamps: true
